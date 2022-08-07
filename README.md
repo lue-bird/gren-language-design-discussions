@@ -7,4 +7,4 @@ Brainstorming, dumping ideas and talking them through is done best in [gren's zu
 ### suggested
   - [field mapping](/field-mapping.md)
   - [record, choice, function](/record-choice-function.md)
-  - [opaque value](/opaque-value.md)
+  - [opaque tagged value](/opaque-tagged-value.md)
