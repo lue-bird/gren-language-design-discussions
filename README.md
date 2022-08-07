@@ -1,4 +1,4 @@
-## gren language design discussion
+## [gren](https://gren-lang.org/) language design discussion
 
 Open place for summarizing ideas, options, arguments.
 
