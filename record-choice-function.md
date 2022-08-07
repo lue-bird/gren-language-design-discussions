@@ -45,7 +45,8 @@ To discuss
   - combining multiple arguments
       - 1-field records, 1-variant choices, only-result functions shouldn't be differentiated
         so their respective syntax shouldn't allow just one argument
-      - 🆚 leading symbol per argument: different for variant `|`, field `,` in `(  )`
+      - 🆚 leading symbol per argument: different for choice `|`, record `,`, function `->`;
+        in `(  )` where necessary
       - 🆚 ` | | `, ` , , `, ` -> -> `
           - 🆚 forced `( ... )`
           - 🆚 redundant `( ... )`s being removed)
