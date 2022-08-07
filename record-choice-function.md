@@ -17,16 +17,16 @@ Code code =
     , #Imports Imports
     , #Range (Range2d Int)
 
-countInitial : , #Count0 Int, #Count1 Int
+countInitial : , #Count0 Int , #Count1 Int
 countInitial =
-    , #Count0 0, #Count1 0
+    , #Count0 0 , #Count1 0
 
-map :
+Array.map :
     -> (-> element
         -> elementMapped
        )
-    -> (-> List element
-        -> List elementMapped
+    -> (-> Array element
+        -> Array elementMapped
        )
 ```
 
@@ -85,12 +85,12 @@ To discuss
           - always requiring `( ... )` is more consistent and obvious:
             ```elm
             Ok Int | Err (List DeadEnd) -> Ok Int | Err String
-            Count0 Int, Count1 Int -> Count0 Int, Count1 Int
+            Count0 Int , Count1 Int -> Count0 Int , Count1 Int
             ```
             compared to
             ```elm
             ( ( Ok Int | Err (List DeadEnd) ) -> ( Ok Int | Err String ) )
-            ( ( Count0 Int, Count1 Int ) -> ( Count0 Int, Count1 Int ) )
+            ( ( Count0 Int , Count1 Int ) -> ( Count0 Int , Count1 Int ) )
             ```
             telling you there's more to look out for later below the first argument
   - extension
@@ -124,7 +124,21 @@ To discuss
         A tag isn't _of a type_, it has a type _attached_
       - _subjective_ not having a separator reads cleanly, `=`/`:` stop flow
       - _subjective_ not including `(...)` _might_ look like multiple attached values
-      - _subjective_ not including `(...)` is harder to parse visually TODO
+      - _subjective_ not including `(...)` is harder to parse visually
+  - field leading symbol spacing
+      - 🆚 `, <field>, <field>`, for example
+        ```elm
+        countInitial : , #Count0 Int, #Count1 Int
+        countInitial =
+            , #Count0 0, #Count1 0
+        ```
+      - 🆚, `, <field> , <field>`
+        ```elm
+        countInitial : , #Count0 Int , #Count1 Int
+        countInitial =
+            , #Count0 0 , #Count1 0
+        ```
+      - `, <field> , <field>` is more in line with `| <variant> | <variant>`
   - force `->` to have 2 arguments?
       - makes currying extremely obvious and explicit
       - discourages reaching for undescriptive positional arguments too often
