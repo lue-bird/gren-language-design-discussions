@@ -1,4 +1,4 @@
-### syntax for record, choice, function
+### record, choice, function
 
 ```elm
 Result value error =
