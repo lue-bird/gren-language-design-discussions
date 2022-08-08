@@ -7,16 +7,16 @@ Password =
 
 to discuss
   - `<opaque keyword>`
-      - 🆚 `opaque`
-      - 🆚 `internal`
-      - 🆚 `module-internal`
+      - _vs_ `opaque`
+      - _vs_ `internal`
+      - _vs_ `module-internal`
   - if opaque types will be available
-      - 🆚
+      - _vs_
         ```elm
         Password =
             internal#Password String
         ```
-      - 🆚
+      - _vs_
         ```elm
         internal Password =
             #Password String

@@ -33,8 +33,8 @@ Array.map :
 To discuss
   - 1 value per tag, disallowing positional values
   - tag leading symbol
-      - 🆚 `#`
-      - 🆚 `-`
+      - _vs_ `#`
+      - _vs_ `-`
       - There needs to be a common syntax for 1-variant choice, 1-field record expressions, patterns, types: `#/-OneVariant _`.
           - `gren-format` will remove potential unique brackets or separators around single tagged values
           - the tag-value representation can then be used to both extend a union or a record
@@ -45,12 +45,12 @@ To discuss
   - combining multiple arguments
       - 1-field records, 1-variant choices, only-result functions shouldn't be differentiated
         so their respective syntax shouldn't allow just one argument
-      - 🆚 leading symbol per argument: different for choice `|`, record `,`, function `->`;
+      - _vs_ leading symbol per argument: different for choice `|`, record `,`, function `->`;
         in `(  )` where necessary
-      - 🆚 ` | | `, ` , , `, ` -> -> `
-          - 🆚 forced `( ... )`
-          - 🆚 redundant `( ... )`s being removed)
-      - 🆚 `< | | >`, `{ , , }` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
+      - _vs_ ` | | `, ` , , `, ` -> -> `
+          - _vs_ forced `( ... )`
+          - _vs_ redundant `( ... )`s being removed)
+      - _vs_ `< | | >`, `{ , , }` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
       - one symbol in ` | | `, ` , , `
         syntactically unifies 1-field record and 1-variant choice
         without further effort
@@ -79,8 +79,8 @@ To discuss
             ```
             have to be declared as separate types
       - one symbol in ` | | `, ` , , `, ` -> -> ` in `( ... )`?
-          - 🆚 forcing `( ... )`
-          - 🆚 `gren-format`ting away redundant `( ... )`
+          - _vs_ forcing `( ... )`
+          - _vs_ `gren-format`ting away redundant `( ... )`
 
         `( ... )` will not be forced on patterns and constructors of 1-field records, variants
           - always requiring `( ... )` is more consistent and obvious:
@@ -95,19 +95,19 @@ To discuss
             ```
             telling you there's more to look out for later below the first argument
   - extension
-      - 🆚 for leading symbols
-          - 🆚 `|| <ext> | `/`,, <ext> ,`
-          - 🆚 `| <ext> | `/`, <ext> , `
-      - 🆚 for separators
-          - 🆚 `<ext> || | `/`,, <ext> ,`
-          - 🆚 `<ext> | | `/`<ext> , , `
+      - _vs_ for leading symbols
+          - _vs_ `|| <ext> | `/`,, <ext> ,`
+          - _vs_ `| <ext> | `/`, <ext> , `
+      - _vs_ for separators
+          - _vs_ `<ext> || | `/`,, <ext> ,`
+          - _vs_ `<ext> | | `/`<ext> , , `
       - `,`/`|` is faster to type than `&`/`||`
       - `||`/`&` as extra symbols seem unnecessary
       - `,`/`|` might be understood as "next, another single element"
         while `&`/`||` might be understood as "and" extend with
   - `<tag>` casing
-      - 🆚 `tag`
-      - 🆚 `#Tag`
+      - _vs_ `tag`
+      - _vs_ `#Tag`
       - most languages lowercase field names
       - `#Tag` looks distinct in types, expressions, patterns, less easy to mix up with variables
       - `#Tag` forbids field punning
@@ -118,8 +118,8 @@ To discuss
       - `#tag` is easier and faster to type
           - `gren-format` could auto-uppercase the tags
   - separator between tag and value
-      - 🆚 `<tag leading symbol><tag> =/: <construct> <arguments>`
-      - 🆚 `<tag leading symbol><tag> (<construct> <arguments>)`
+      - _vs_ `<tag leading symbol><tag> =/: <construct> <arguments>`
+      - _vs_ `<tag leading symbol><tag> (<construct> <arguments>)`
       - `:` requires less `(...)`
       - `<tag>` `:` (of type) `<value>`:
         A tag isn't _of a type_, it has a type _attached_
@@ -127,13 +127,13 @@ To discuss
       - _subjective_ not including `(...)` _might_ look like multiple attached values
       - _subjective_ not including `(...)` is harder to parse visually
   - field leading symbol spacing
-      - 🆚 `, <field>, <field>`, for example
+      - _vs_ `, <field>, <field>`, for example
         ```elm
         countInitial : , #Count0 Int, #Count1 Int
         countInitial =
             , #Count0 0, #Count1 0
         ```
-      - 🆚, `, <field> , <field>`
+      - _vs_, `, <field> , <field>`
         ```elm
         countInitial : , #Count0 Int , #Count1 Int
         countInitial =
@@ -157,11 +157,11 @@ Translate mapped unmapped =
 ```
 
 To discuss
-  - `type alias <type> =` 🆚 `<type>`
+  - `type alias <type> =` _vs_ `<type>`
       - simple
       - less distinct from value, function declarations
   - if ` | | `, ` , , `, ` -> -> ` parens are optional
-      - 🆚
+      - _vs_
         ```elm
         AOrB arguments
             = #A
@@ -175,7 +175,7 @@ To discuss
             : #A
             , #B
         ```
-      - 🆚
+      - _vs_
         ```elm
         AOrB arguments =
               #A

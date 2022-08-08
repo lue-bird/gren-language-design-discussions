@@ -51,14 +51,14 @@ succeed (, #Name #Blank , #Status #Blank , #Metadata metadataDefault)
 
 To discuss
   - symbol
-      - 🆚 `!`
-      - 🆚 `/`
+      - _vs_ `!`
+      - _vs_ `/`
       - `!`, `/` look like "action"
       - `!` looks like `.` (field access) with something else on top
       - _subjective_ `/` is hard and confusing to read with lambdas
   - representation
-      - 🆚 function
-      - 🆚 `infix`
+      - _vs_ function
+      - _vs_ `infix`
       - `infix` is slightly more compact
       - function reads better alongside other transformations
       - `infix` can't be curried
