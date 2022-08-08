@@ -13,13 +13,13 @@ case result of
         value
 
 Code code =
-    , code
-    , #Imports Imports
-    , #Range (Range2d Int)
+    ; code
+    ; #Imports Imports
+    ; #Range (Range2d Int)
 
-countInitial : , #Count0 Int , #Count1 Int
+countInitial : ; #Count0 Int ; #Count1 Int
 countInitial =
-    , #Count0 0 , #Count1 0
+    ; #Count0 0 ; #Count1 0
 
 Array.map :
     -> (-> element
@@ -45,13 +45,13 @@ To discuss
   - combining multiple arguments
       - 1-field records, 1-variant choices, only-result functions shouldn't be differentiated
         so their respective syntax shouldn't allow just one argument
-      - _vs_ leading symbol per argument: different for choice `|`, record `,`, function `->`;
+      - _vs_ leading symbol per argument: different for choice `|`, record `;`, function `->`;
         in `(  )` where necessary
-      - _vs_ ` | | `, ` , , `, ` -> -> `
+      - _vs_ ` | | `, ` ; ; `, ` -> -> `
           - _vs_ forced `( ... )`
           - _vs_ redundant `( ... )`s being removed)
-      - _vs_ `< | | >`, `{ , , }` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
-      - one symbol in ` | | `, ` , , `
+      - _vs_ `< | | >`, `{ ; ; }` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
+      - one symbol in ` | | `, ` ; ; `
         syntactically unifies 1-field record and 1-variant choice
         without further effort
           - allows `.Tag` to access the value
@@ -78,7 +78,7 @@ To discuss
                     still |> impossible
             ```
             have to be declared as separate types
-      - one symbol in ` | | `, ` , , `, ` -> -> ` in `( ... )`?
+      - one symbol in ` | | `, ` ; ; `, ` -> -> ` in `( ... )`?
           - _vs_ forcing `( ... )`
           - _vs_ `gren-format`ting away redundant `( ... )`
 
@@ -86,21 +86,21 @@ To discuss
           - always requiring `( ... )` is more consistent and obvious:
             ```elm
             Ok Int | Err (List DeadEnd) -> Ok Int | Err String
-            Count0 Int , Count1 Int -> Count0 Int , Count1 Int
+            Count0 Int ; Count1 Int -> Count0 Int ; Count1 Int
             ```
             compared to
             ```elm
             ( ( Ok Int | Err (List DeadEnd) ) -> ( Ok Int | Err String ) )
-            ( ( Count0 Int , Count1 Int ) -> ( Count0 Int , Count1 Int ) )
+            ( ( Count0 Int ; Count1 Int ) -> ( Count0 Int ; Count1 Int ) )
             ```
             telling you there's more to look out for later below the first argument
   - extension
       - _vs_ for leading symbols
-          - _vs_ `|| <ext> | `/`,, <ext> ,`
-          - _vs_ `| <ext> | `/`, <ext> , `
+          - _vs_ `|| <ext> | `/`;; <ext> ,`
+          - _vs_ `| <ext> | `/`; <ext> ; `
       - _vs_ for separators
-          - _vs_ `<ext> || | `/`,, <ext> ,`
-          - _vs_ `<ext> | | `/`<ext> , , `
+          - _vs_ `<ext> || | `/`; <ext> ,`
+          - _vs_ `<ext> | | `/`<ext> ; ; `
       - `,`/`|` is faster to type than `&`/`||`
       - `||`/`&` as extra symbols seem unnecessary
       - `,`/`|` might be understood as "next, another single element"
@@ -113,7 +113,10 @@ To discuss
       - `#Tag` forbids field punning
           - points in earlier discussion;
             basically improves descriptiveness and scales better
-      - having fields like `( #Camera Camera, #Mood Mood, #Lighting Lighting, #Rules Rules )`
+      - having fields like
+        ```elm
+        ; #Camera Camera; #Mood Mood; #Lighting Lighting; #Rules Rules
+        ```
         _might_, even though it's unambiguous, be confusing: "which is the type, what's the type?"
       - `#tag` is easier and faster to type
           - `gren-format` could auto-uppercase the tags
@@ -127,19 +130,19 @@ To discuss
       - _subjective_ not including `(...)` _might_ look like multiple attached values
       - _subjective_ not including `(...)` is harder to parse visually
   - field leading symbol spacing
-      - _vs_ `, <field>, <field>`, for example
+      - _vs_ `<field>; <field>`, for example
         ```elm
-        countInitial : , #Count0 Int, #Count1 Int
+        countInitial : ; #Count0 Int; #Count1 Int
         countInitial =
-            , #Count0 0, #Count1 0
+            ; #Count0 0; #Count1 0
         ```
-      - _vs_, `, <field> , <field>`
+      - _vs_ `<field> ; <field>`
         ```elm
-        countInitial : , #Count0 Int , #Count1 Int
+        countInitial : ; #Count0 Int ; #Count1 Int
         countInitial =
-            , #Count0 0 , #Count1 0
+            ; #Count0 0 ; #Count1 0
         ```
-      - `, <field> , <field>` is more in line with `| <variant> | <variant>`
+      - `<field> ; <field>` is in line with `<variant> | <variant>`
   - force `->` to have 2 arguments?
       - makes currying extremely obvious and explicit
       - discourages reaching for undescriptive positional arguments too often
@@ -151,8 +154,8 @@ To discuss
 ```elm
 Translate mapped unmapped =
     #BothWays
-        (, #Map (-> unmapped -> mapped)
-         , #Unmap (-> mapped -> unmapped)
+        (; #Map (-> unmapped -> mapped)
+         ; #Unmap (-> mapped -> unmapped)
         )
 ```
 
@@ -160,7 +163,7 @@ To discuss
   - `type alias <type> =` _vs_ `<type>`
       - simple
       - less distinct from value, function declarations
-  - if ` | | `, ` , , `, ` -> -> ` parens are optional
+  - if ` | | `, ` ; ; `, ` -> -> ` parens are optional
       - _vs_
         ```elm
         AOrB arguments
@@ -173,7 +176,7 @@ To discuss
         
         aAndB
             : #A
-            , #B
+            ; #B
         ```
       - _vs_
         ```elm
@@ -187,6 +190,6 @@ To discuss
         
         aAndB :
               #A
-            , #B
+            ; #B
         ```
       - `=`/`:` on the same line is more in line with all other type/value declarations

@@ -4,8 +4,8 @@ Introducing syntax for changing one specific field value
 ```elm
 !Name :
     -> (-> value -> valueMapped)
-    -> , record , #Name value
-    -> , record , #Name valueMapped
+    -> ; record ; #Name value
+    -> ; record ; #Name valueMapped
 ```
 
 which one previously had to write as
@@ -40,7 +40,7 @@ Apart from syntax, the proposed syntax also allows changing the field value's ty
 Blank =
     #Blank
 
-succeed (, #Name #Blank , #Status #Blank , #Metadata metadataDefault)
+succeed (; #Name #Blank ; #Status #Blank ; #Metadata metadataDefault)
     |> field !Name "name" string
     |> field !Status "status" string
 ```
@@ -72,9 +72,9 @@ To discuss
 
 ```elm
 Pet specificProperties =
-    , specificProperties
-    , #Name String
-    , #Hunger Progress
+    ; specificProperties
+    ; #Name String
+    ; #Hunger Progress
 
 Cat =
     #Cat (#NapsPerDay Float)
@@ -87,7 +87,7 @@ sit =
     !Dog (!Hunger (Progress.by 0.01))
 
 howdy =
-    #Cat (, #Name "Howdy" , #Hunger Progress.begin , #NapsPerDay 2.2)
+    #Cat (; #Name "Howdy" ; #Hunger Progress.begin ; #NapsPerDay 2.2)
 
 howdy |> sit -- error
 ```
@@ -99,7 +99,7 @@ removing the intermediate need for boilerplate.
 module Dog exposing (hungerAlter)
 
 Dog =
-    #Dog (, #BarksPerDay Float , #Hunger Progress)
+    #Dog (; #BarksPerDay Float ; #Hunger Progress)
 
 hungerAlter : -> (Progress -> Progress) -> (Dog -> Dog)
 hungerAlter =
