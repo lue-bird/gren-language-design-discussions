@@ -1,4 +1,4 @@
-### record, choice, function
+### record, `Array`, choice, function
 
 ```elm
 Result value error =
@@ -28,6 +28,16 @@ Array.map :
     -> (-> Array element
         -> Array elementMapped
        )
+
+(, (, 0 , 1 , 2)
+ , (, 3 , 4 , 5)
+ , (, 6 , 7 , 8)
+)
+    |> Array.concatMap Array.sum
+    |> Array.map String.fromInt
+--> , "3"
+--> , "12"
+--> , "21"
 ```
 
 To discuss
@@ -45,12 +55,12 @@ To discuss
   - combining multiple arguments
       - 1-field records, 1-variant choices, only-result functions shouldn't be differentiated
         so their respective syntax shouldn't allow just one argument
-      - _vs_ leading symbol per argument: different for choice `|`, record `;`, function `->`;
+      - _vs_ leading symbol per argument: different for record `;`, `Array` `,`, choice `|`, function `->`;
         in `(  )` where necessary
-      - _vs_ ` | | `, ` ; ; `, ` -> -> `
+      - _vs_ ` ; ; `, ` , , `, ` | | `, ` -> -> `
           - _vs_ forced `( ... )`
           - _vs_ redundant `( ... )`s being removed)
-      - _vs_ `< | | >`, `{ ; ; }` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
+      - _vs_ `< | | >`, `{ ; ; }`, `[ , , ]` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
       - one symbol in ` | | `, ` ; ; `
         syntactically unifies 1-field record and 1-variant choice
         without further effort
@@ -78,7 +88,7 @@ To discuss
                     still |> impossible
             ```
             have to be declared as separate types
-      - one symbol in ` | | `, ` ; ; `, ` -> -> ` in `( ... )`?
+      - one symbol in ` ; ; `, ` , , `, ` | | `, ` -> -> ` in `( ... )`?
           - _vs_ forcing `( ... )`
           - _vs_ `gren-format`ting away redundant `( ... )`
 
@@ -96,15 +106,15 @@ To discuss
             telling you there's more to look out for later below the first argument
   - extension
       - _vs_ for leading symbols
-          - _vs_ `|| <ext> | `/`;; <ext> ,`
+          - _vs_ `|| <ext> | `/`;; <ext> ; `
           - _vs_ `| <ext> | `/`; <ext> ; `
       - _vs_ for separators
-          - _vs_ `<ext> || | `/`; <ext> ,`
+          - _vs_ `<ext> || | `/`<ext> ;; ; `
           - _vs_ `<ext> | | `/`<ext> ; ; `
-      - `,`/`|` is faster to type than `&`/`||`
-      - `||`/`&` as extra symbols seem unnecessary
-      - `,`/`|` might be understood as "next, another single element"
-        while `&`/`||` might be understood as "and" extend with
+      - `;`/`|` is faster to type than `;;`/`||`
+      - `||`/`;;` as extra symbols seem unnecessary
+      - `;`/`|` might be understood as "next, another single element"
+        while `;;`/`||` might be understood as "and" extend with
   - `<tag>` casing
       - _vs_ `tag`
       - _vs_ `#Tag`
@@ -163,7 +173,7 @@ To discuss
   - `type alias <type> =` _vs_ `<type>`
       - simple
       - less distinct from value, function declarations
-  - if ` | | `, ` ; ; `, ` -> -> ` parens are optional
+  - if `; ; `, `, , `, `| | `, ` -> -> ` parens are optional
       - _vs_
         ```elm
         AOrB arguments
@@ -185,7 +195,7 @@ To discuss
             | #B
         
         aToB :
-              #A
+               #A
             -> #B
         
         aAndB :
