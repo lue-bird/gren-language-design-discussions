@@ -17,7 +17,7 @@
 
 }
 Dict.ExtraOrdered :
-    -> (-> (; #A key ; B key) -> Order)
+    -> (-> (; #A key ; #B key) -> Order)
     -> (, map
         , element , elementAlter , elementRemove
         , insert
