@@ -8,6 +8,7 @@ Brainstorming, dumping ideas and talking them through is done best in [gren's zu
 
   - [field mapping](/field-mapping.md)
   - [record, `Array`, choice, function](/record-choice-function.md)
+  - [type declaration limit](/type-declaration-limit.md)
   - [comment, documentation](/comment-documentation.md)
   - [opaque tagged value](/opaque-tagged-value.md)
   - [module header, import](/module-header-import.md)
