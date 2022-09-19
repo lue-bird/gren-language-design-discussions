@@ -5,12 +5,13 @@ Result value error =
     | #Failure error
     | #Success value
 
-case result of
-    #Failure error ->
-        error.Expected.Minimum
-    
-    #Success value ->
-        value
+result
+    |> match
+        (| (#Failure error)
+            error |> .Expected |> .Minimum
+         | (#Success value)
+            value
+        )
 
 Code code =
     ; code
@@ -28,6 +29,9 @@ Array.map :
     -> (-> Array element
         -> Array elementMapped
        )
+    =
+    \elementChange \array
+        array |> Array.Internal.map elementChange
 
 (, (, 0 , 1 , 2)
  , (, 3 , 4 , 5)
@@ -42,16 +46,36 @@ Array.map :
 
 To discuss
   - 1 value per tag, disallowing positional values
-  - tag leading symbol
-      - _vs_ `#`
-      - _vs_ `-`
-      - There needs to be a common syntax for 1-variant choice, 1-field record expressions, patterns, types: `#/-OneVariant _`.
+  - tag mark
+      - _vs_ always `#<tag>`
+      - _vs_ uppercase `#Tag` represented as `Tag` in expression, pattern
+      - _vs_ uppercase `Tag` without leading `#`
+
+      - There needs to be a common syntax for 1-variant choice, 1-field record expressions, patterns, types: `#OneVariant _`.
           - `gren-format` will remove potential unique brackets or separators around single tagged values
           - the tag-value representation can then be used to both extend a union or a record
           - common syntax for field/variant tagging/accessing/mapping
         
         Since, as argued above, this is the case, it would be confusing not to require a leading symbol for all tags
-      - `-` _might_ be interpreted as "subtract" or "private"
+    - `<tag>` casing
+      - _vs_ `#tag`
+      - _vs_ 
+      - most languages lowercase field names, so `#tag`
+      - most languages uppercase variant names, so `#Tag`
+      - `#<tag>` in types, expressions, patterns is less easy to mix up with variables
+      - uppercase `Tag` without leading `#` in types
+        is too similar to named types like `Array`
+      - uppercase tag forbids field punning
+          - points in earlier discussion;
+            basically improves descriptiveness and scales better
+      - having fields like
+        ```elm
+        ; #Camera Camera; #Mood Mood; #Lighting Lighting; #Rules Rules
+        ```
+        _might_, even though it's unambiguous, be confusing: "which is the type, what's the type?"
+      - lowercase tag is easier and faster to type
+          - `gren-format` can auto-uppercase
+
   - combining multiple arguments
       - 1-field records, 1-variant choices, only-result functions shouldn't be differentiated
         so their respective syntax shouldn't allow just one argument
@@ -115,21 +139,6 @@ To discuss
       - `||`/`;;` as extra symbols seem unnecessary
       - `;`/`|` might be understood as "next, another single element"
         while `;;`/`||` might be understood as "and" extend with
-  - `<tag>` casing
-      - _vs_ `tag`
-      - _vs_ `#Tag`
-      - most languages lowercase field names
-      - `#Tag` looks distinct in types, expressions, patterns, less easy to mix up with variables
-      - `#Tag` forbids field punning
-          - points in earlier discussion;
-            basically improves descriptiveness and scales better
-      - having fields like
-        ```elm
-        ; #Camera Camera; #Mood Mood; #Lighting Lighting; #Rules Rules
-        ```
-        _might_, even though it's unambiguous, be confusing: "which is the type, what's the type?"
-      - `#tag` is easier and faster to type
-          - `gren-format` could auto-uppercase the tags
   - separator between tag and value
       - _vs_ `<tag leading symbol><tag> =/: <construct> <arguments>`
       - _vs_ `<tag leading symbol><tag> (<construct> <arguments>)`
