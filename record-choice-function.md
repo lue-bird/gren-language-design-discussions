@@ -171,7 +171,9 @@ To discuss
         where redundant parens are removed
   - pattern matching syntax
       - _vs_ reuse `\` from lambda
-          - F# uses `function` for exactly that
+          - OCaml, F# use `function` for exactly that
+          - elexir has something similar
+          - LambdaCase is similar
       - _vs_ introduce a new keyword like `match`
           - most languages do it like that
       - one unifying symbol makes it much easier to switch from one tho the other
