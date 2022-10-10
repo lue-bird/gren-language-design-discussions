@@ -21,9 +21,9 @@ which one previously had to write as
 
 ```elm
 model
-    |> !PlayerPosition (!Y (\_ -> 0))
+    |> !PlayerPosition (!Y (\_ 0))
     |> !PlayerVelocity
-        (\velocity ->
+        (\velocity
             velocity
                 |> !X (\* 0.95)
                 |> !Y (\* 0.95)

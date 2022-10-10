@@ -5,13 +5,15 @@ Result value error =
     | #Failure error
     | #Success value
 
-result
-    |> match
-        (| (#Failure error)
-            error |> .Expected |> .Minimum
-         | (#Success value)
-            value
-        )
+
+Int.atLeast = \minimum \int
+    int
+        |> Int.isAtLeast minimum
+        |> \
+            | (#Failure error)
+                error |> .Expected |> .Minimum
+            | (#Success value)
+                value
 
 Code code =
     ; code
@@ -37,7 +39,7 @@ Array.map :
  , (, 3 , 4 , 5)
  , (, 6 , 7 , 8)
 )
-    |> Array.concatMap Array.sum
+    |> Array.map Array.sum
     |> Array.map String.fromInt
 --> , "3"
 --> , "12"
@@ -167,6 +169,15 @@ To discuss
       - discourages reaching for undescriptive positional arguments too often
       - forcing some `(  )`s in types isn't in line with expressions
         where redundant parens are removed
+  - pattern matching syntax
+      - _vs_ reuse `\` from lambda
+          - F# uses `function` for exactly that
+      - _vs_ introduce a new keyword like `match`
+          - most languages do it like that
+      - one unifying symbol makes it much easier to switch from one tho the other
+      - adding reserved makes the language less simple (not by a lot)
+      - reusing `\` makes the similarities to lambda obvious
+      - _subjective_ `\` looks clean in combination with the indented `|` branches
 
 ### declaration
 

@@ -1,7 +1,7 @@
 ## module header, import
 
 ```elm
-{: `Dict` convenience operations.
+{: `Dict` convenience operations
 
 ## transform
 
