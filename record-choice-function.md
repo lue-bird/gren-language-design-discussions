@@ -171,15 +171,36 @@ To discuss
         where redundant parens are removed
   - pattern matching syntax
       - _vs_ reuse `\` from lambda
+          - _vs_ format a new-line after `\` before `|`
+          - _vs_ format `\` and directly after that `|`
           - OCaml, F# use `function` for exactly that
-          - elexir has something similar
+          - elixir has something similar
           - LambdaCase is similar
       - _vs_ introduce a new keyword like `match`
           - most languages do it like that
       - one unifying symbol makes it much easier to switch from one tho the other
       - adding reserved makes the language less simple (not by a lot)
       - reusing `\` makes the similarities to lambda obvious
-      - _subjective_ `\` looks clean in combination with the indented `|` branches
+      - _subjective_ `\` looks clean in combination with the indented `|` branches, especially with a new-line between `\` and the first `|`
+      - not separating `\` and the first `|` with a new-line is more compact
+  - if
+      - _vs_ use pattern matching
+        ```elm
+        int <= maximum
+            |> \
+                | #True int
+                | #False maximum
+        ```
+      - _vs_ also supply
+        ```elm
+        Bool.if (int <= maximum)
+            (; #Then int
+             ; #Else maximum
+            )
+        ```
+      - _vs_ custom syntax
+      - if should be reached for rarely in favor of pattern matching
+      - introducing extra sugar brings more work to maintain for tooling and is one extra thing to learn
 
 ### declaration
 
