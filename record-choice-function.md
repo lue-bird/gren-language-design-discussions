@@ -200,6 +200,8 @@ To discuss
         ```
       - _vs_ custom syntax
       - if should be reached for rarely in favor of pattern matching
+          - "parse, don't validate"
+          - more descriptive types, values, cases
       - introducing extra sugar brings more work to maintain for tooling and is one extra thing to learn
 
 ### declaration
@@ -213,7 +215,7 @@ Translate mapped unmapped =
 ```
 
 To discuss
-  - `type alias <type> =` _vs_ `<type>`
+  - `type alias <type>` _vs_ `<type>`
       - simple
       - less distinct from value, function declarations
   - if `; ; `, `, , `, `| | `, ` -> -> ` parens are optional
