@@ -1,7 +1,7 @@
 ## comment, documentation
 
-```elm
-{: Module documentation
+```markdown
+{: Module **documentation**
 
     example
         { Provided by some library
@@ -11,14 +11,14 @@
         |> sanitize sanitizeOptionsDefault
         |> add n3
         |> { now we can turn it back }
-           toInt
+            toInt
         |> { now we are in unsafe space again }
-           \^ -2
+            \^ -2
     { |> Expect.equal 4 }
 
 ## transform
 
-@document map, fold
+@documentation (, map, fold)
 
 }
 ```
