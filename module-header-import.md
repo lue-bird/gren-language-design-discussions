@@ -3,24 +3,24 @@
 ```elm
 {: `Dict` convenience operations
 
-## transform
-
-@documentation (, map)
-
 ## scan
 
 @documentation (, element)
 
 ## alter
 
-@documentation (, elementAlter , elementRemove , insert)
+@documentation (, elementAlter , remove , insert)
+
+## transform
+
+@documentation (, map)
 
 }
 Dict.ExtraOrdered :
     -> (-> (; #A key ; #B key) -> Order)
-    -> (, map
-        , element , elementAlter , elementRemove
-        , insert
+    -> (, element
+        , elementAlter , remove , insert
+        , map
        )
 Dict.ExtraOrdered order =
 
@@ -30,7 +30,7 @@ Emptiable(, _, Emptiable) = import Emptiable
 
 toStack :
     -> Dict key value
-    -> Emptiable (Stacked (; #Key key ; #Value value)) Never
+    -> Emptiable (Stacked (; #Key key ; #Value value)) never_
 toStack =
     toList >> Stack.fromList
 ```
@@ -41,3 +41,4 @@ to discuss
     - _vs_ explicitly list all members in one place
     - un-exposing should be easy but the specific `@documentation` is less easy to find
         - tools can automatically do that on declaration click
+    - looking at the header as a `module` author, it should be easy to see all exposed things
