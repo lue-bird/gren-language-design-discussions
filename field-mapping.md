@@ -48,6 +48,7 @@ succeed (; #Name #Blank ; #Status #Blank ; #Metadata metadataDefault)
   - simple
   - declarative `succeed` showing the final shape
   - field value changes are drastically simpler and less verbose
+  - could be misused to alter previous fields
 
 To discuss
   - symbol
