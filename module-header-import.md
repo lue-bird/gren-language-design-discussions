@@ -3,7 +3,7 @@
 ```elm
 {: `Dict` convenience operations
 
-## scan
+## observe
 
 @documentation (, element)
 
@@ -16,23 +16,21 @@
 @documentation (, map)
 
 }
-Dict.ExtraOrdered :
-    -> (-> (; #A key ; #B key) -> Order)
-    -> (, element
-        , elementAlter , remove , insert
-        , map
-       )
-Dict.ExtraOrdered order =
+module Dict.Extra exposing
+    (, element
+     , elementAlter , remove , insert
+     , map
+    )
 
-Dict(, _ , toList , Dict) = import DictOrdered order
-Stack(, _, Stacked) = import Stack
-Emptiable(, _, Emptiable) = import Emptiable
+import Dict exposing (, _ , toList , Dict)
+import Stack exposing (, _ , Stack)
+import Emptiable exposing (, _ , Emptiable)
 
 toStack :
     -> Dict key value
-    -> Emptiable (Stacked (; #Key key ; #Value value)) never_
+    -> Emptiable (Stack (; #Key key ; #Value value)) Possibly
 toStack =
-    toList >> Stack.fromList
+    \dict -> dict |> toList |> Stack.fromList
 ```
 
 to discuss
@@ -42,3 +40,9 @@ to discuss
     - un-exposing should be easy but the specific `@documentation` is less easy to find
         - tools can automatically do that on declaration click
     - looking at the header as a `module` author, it should be easy to see all exposed things
+- import alias
+    - _vs_ allow
+    - _vs_ forbid
+    - no module has authority to add operations etc. to a namespace, like `import List.Extra as List` → less clutter
+    - no alias → simpler (less to learn, easier tooling etc.)
+    - when a variable is qualified, you can be sure of its origin
