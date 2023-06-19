@@ -9,11 +9,10 @@ Result value error =
 Int.atLeast = \minimum \int
     int
         |> Int.isAtLeast minimum
-        |> \
-            | (#Failure error)
-                error |> .Expected |> .Minimum
-            | (#Success value)
-                value
+        |> | (#Failure error)
+              error |> .Expected |> .Minimum
+           \ (#Success value)
+              value
 
 Code code =
     ; code
@@ -85,7 +84,7 @@ To discuss
         in `(  )` where necessary
       - _vs_ ` ; ; `, ` , , `, ` | | `, ` -> -> `
           - _vs_ forced `( ... )`
-          - _vs_ redundant `( ... )`s being removed)
+          - _vs_ redundant `( ... )`s being removed
       - _vs_ `< | | >`, `{ ; ; }`, `[ , , ]` (and `[ -> -> ]` or some other brackets for functions, with `[]` being invalid syntax)
       - one symbol in ` | | `, ` ; ; `
         syntactically unifies 1-field record and 1-variant choice
@@ -170,9 +169,36 @@ To discuss
       - forcing some `(  )`s in types isn't in line with expressions
         where redundant parens are removed
   - pattern matching syntax
-      - _vs_ reuse `\` from lambda
+      - _vs_ reuse `\` from lambda, list cases with `|`
           - _vs_ format a new-line after `\` before `|`
+            ```elm
+            \
+             | (#Failure error)
+                 error |> .Expected |> .Minimum
+             | (#Success value)
+                 value
+            ```
           - _vs_ format `\` and directly after that `|`
+            ```elm
+            \| (#Failure error)
+                 error |> .Expected |> .Minimum
+             | (#Success value)
+                 value
+            ```
+          - _vs_ format `\` for the first case and  for the other cases `|`
+            ```elm
+            \ (#Failure error)
+                error |> .Expected |> .Minimum
+            | (#Success value)
+                value
+            ```
+          - _vs_ format `\` for the last case and for the previous cases `|`
+            ```elm
+            | (#Failure error)
+                error |> .Expected |> .Minimum
+            \ (#Success value)
+                value
+            ```
           - OCaml, F# use `function` for exactly that
           - elixir has something similar
           - LambdaCase is similar
@@ -181,15 +207,17 @@ To discuss
       - one unifying symbol makes it much easier to switch from one tho the other
       - adding reserved makes the language less simple (not by a lot)
       - reusing `\` makes the similarities to lambda obvious
-      - _subjective_ `\` looks clean in combination with the indented `|` branches, especially with a new-line between `\` and the first `|`
+      - _subjective_ `\` looks ok in combination with the indented `|` branches, especially with a new-line between `\` and the first `|`
       - not separating `\` and the first `|` with a new-line is more compact
+      - not having `|` for the first of multiple patterns doesn't make it seem like there are more cases to come
+      - Having `\` for the last case is a cute visual sign that all cases will have been matched then
+      - Having `\` for a specific case makes it harder to move cases around (bad)
   - if
       - _vs_ use pattern matching
         ```elm
         int <= maximum
-            |> \
-                | #True int
-                | #False maximum
+            |> | #True int
+               \ #False maximum
         ```
       - _vs_ also supply
         ```elm
@@ -203,6 +231,7 @@ To discuss
           - "parse, don't validate"
           - more descriptive types, values, cases
       - introducing extra sugar brings more work to maintain for tooling and is one extra thing to learn
+      - _personal opinion_ There doesn't even need to be a `Bool` exposed from `gren/core`
 
 ### declaration
 
@@ -216,8 +245,8 @@ Translate mapped unmapped =
 
 To discuss
   - `type alias <type>` _vs_ `<type>`
-      - simple
-      - less distinct from value, function declarations
+      - no keywords is simpler, less visual noise
+      - keywords make it look more distinct from value, function declarations
   - if `; ; `, `, , `, `| | `, ` -> -> ` parens are optional
       - _vs_
         ```elm
