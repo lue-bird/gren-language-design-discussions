@@ -178,6 +178,8 @@ To discuss
              | (#Success value)
                  value
             ```
+            - [OCaml](https://ocaml.org/docs/data-types#constructors-with-data),
+              [F#](https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/match-expressions#syntax) use that syntax with `function` instead of `\`
           - _vs_ format `\` and directly after that `|`
             ```elm
             \| (#Failure error)
@@ -192,6 +194,7 @@ To discuss
             | (#Success value)
                 value
             ```
+            - LambdaCase uses this exact syntax
           - _vs_ format `\` for the last case and for the previous cases `|`
             ```elm
             | (#Failure error)
@@ -199,11 +202,10 @@ To discuss
             \ (#Success value)
                 value
             ```
-          - OCaml, F# use `function` for exactly that
-          - elixir has something similar
-          - LambdaCase is similar
+            - [tao](https://github.com/zesterer/tao) uses this exact syntax
       - _vs_ introduce a new keyword like `match`
           - most languages do it like that
+      - [elixir uses `fn` with indentation](https://elixir-lang.org/getting-started/case-cond-and-if.html)
       - one unifying symbol makes it much easier to switch from one tho the other
       - adding reserved makes the language less simple (not by a lot)
       - reusing `\` makes the similarities to lambda obvious
