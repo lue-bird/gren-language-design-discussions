@@ -30,9 +30,8 @@ Array.map :
     -> (-> Array element
         -> Array elementMapped
        )
-    =
-    \elementChange \array
-        array |> Array.Internal.map elementChange
+    = \elementChange \array
+    array |> Array.Internal.map elementChange
 
 (, (, 0 , 1 , 2)
  , (, 3 , 4 , 5)
